@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Online Exam System</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      width: 320px;
+      text-align: center;
+      box-shadow: 0px 10px 25px rgba(0,0,0,0.2);
+    }
+
+    h2 {
+      margin-bottom: 15px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 6px;
+      background: #667eea;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #5a67d8;
+    }
+
+    .toggle {
+      margin-top: 15px;
+      cursor: pointer;
+      color: #667eea;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+  <h2 id="title">Signup</h2>
+
+  <input type="text" id="name" placeholder="Enter Name" style="display:none;">
+  <input type="email" id="email" placeholder="Enter Email">
+  <input type="password" id="password" placeholder="Enter Password">
+
+  <button id="actionBtn">Signup</button>
+
+  <div class="toggle" onclick="toggleMode()">
+    Already have an account? Login
+  </div>
+</div>
+
+<script src="./config.js"></script>
+<script>
+  function getApiBaseUrl() {
+    return (window.APP_CONFIG && window.APP_CONFIG.API_BASE_URL) ? window.APP_CONFIG.API_BASE_URL.replace(/\/$/, "") : "";
+  }
+
+  async function apiRequest(path, payload) {
+    const baseUrl = getApiBaseUrl();
+    if (!baseUrl || baseUrl.includes("YOUR-BACKEND-ON-RENDER")) {
+      throw new Error("Set frontend/config.js to your Render backend URL first.");
+    }
+
+    const response = await fetch(`${baseUrl}${path}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      throw new Error(data.message || data.error || "Request failed");
+    }
+    return data;
+  }
+
+  let isLogin = false;
+
+  const title = document.getElementById("title");
+  const actionBtn = document.getElementById("actionBtn");
+  const nameInput = document.getElementById("name");
+
+  actionBtn.addEventListener("click", async () => {
+    try {
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+      const name = document.getElementById("name").value.trim();
+
+      if (isLogin) {
+        const data = await apiRequest("/api/login", { email, password });
+        localStorage.setItem("currentUser", JSON.stringify({
+          name: data.user?.name || email,
+          email: data.user?.email || email
+        }));
+        alert("Login Successful 🎉");
+        window.location.href = "./dashboard.html";
+      } else {
+        if (!name) {
+          alert("Please enter your name");
+          return;
+        }
+        await apiRequest("/api/register", { name, email, password });
+        alert("Signup Successful 🎉");
+        toggleMode();
+      }
+    } catch (err) {
+      alert(err.message);
+    }
+  });
+
+  window.toggleMode = function () {
+    isLogin = !isLogin;
+
+    if (isLogin) {
+      title.innerText = "Login";
+      actionBtn.innerText = "Login";
+      nameInput.style.display = "none";
+      document.querySelector(".toggle").innerText = "Don't have an account? Signup";
+    } else {
+      title.innerText = "Signup";
+      actionBtn.innerText = "Signup";
+      nameInput.style.display = "block";
+      document.querySelector(".toggle").innerText = "Already have an account? Login";
+    }
+  };
+</script>
+
+</body>
+</html>

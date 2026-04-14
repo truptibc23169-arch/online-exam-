@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Computing Quiz</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gradient-primary">
+
+<div class="container-fluid min-vh-100 d-flex align-items-center justify-content-center">
+    <div class="card shadow-lg border-0 rounded-4" style="max-width: 600px; width: 100%;">
+        <div class="card-body p-5">
+            <div class="text-center mb-4">
+                <div class="quiz-header-icons mb-3">
+                    <img src="images/cloud.svg" alt="Cloud" class="cloud-header cloud-h1">
+                    <img src="images/server-bg.svg" alt="Server" class="cloud-header cloud-h2">
+                    <img src="images/cloud.svg" alt="Cloud" class="cloud-header cloud-h3">
+                </div>
+                <h1 class="display-5 fw-bold text-primary mb-3 animate-fade-in">Cloud Computing Quiz</h1>
+                <div class="badge bg-warning text-dark fs-5 px-3 py-2 animate-bounce-in">
+                    <i class="fas fa-clock me-2"></i>Time Left: <span id="time" class="fw-bold">60</span> seconds
+                </div>
+            </div>
+
+            <!-- Progress Indicator -->
+            <div class="progress-section mb-4">
+                <div class="progress-card">
+                    <h5 class="text-center mb-3">
+                        <i class="fas fa-tasks me-2"></i>Progress
+                    </h5>
+                    <div class="progress mb-2" style="height: 20px;">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 0%" id="progress-bar"></div>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span id="attempted-count" class="fw-bold text-primary">0</span>
+                        <span class="fw-bold text-muted">/ 10 Questions</span>
+                        <span id="pending-count" class="fw-bold text-warning">10</span>
+                    </div>
+                    <div class="text-center mt-2">
+                        <small class="text-muted">
+                            <span id="attempted-label">0 Attempted</span> |
+                            <span id="pending-label">10 Pending</span>
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-section mb-4">
+                <h2 id="q" class="h4 fw-semibold text-dark mb-4"></h2>
+                <div id="opt" class="options-grid"></div>
+            </div>
+
+            <div class="text-center">
+                <button id="next-btn" class="btn btn-primary btn-lg px-5 py-3 fw-semibold" onclick="next()" disabled>
+                    <i class="fas fa-arrow-right me-2"></i>Next Question
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 10 Second Warning Modal -->
+<div class="modal fade" id="timeWarningModal" tabindex="-1" aria-labelledby="timeWarningModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg">
+            <div class="modal-body text-center p-4">
+                <div class="warning-icon mb-3">
+                    <i class="fas fa-exclamation-triangle fa-4x text-danger animate-bounce"></i>
+                </div>
+                <h2 class="modal-title text-danger fw-bold mb-3" id="timeWarningModalLabel">
+                    ⚠️ TIME WARNING!
+                </h2>
+                <h3 class="text-danger fw-bold mb-3">
+                    <span id="warning-time" class="bg-danger text-white px-3 py-2 rounded-pill">10</span> seconds left!
+                </h3>
+                <p class="text-muted mb-4">
+                    Please answer quickly! The quiz will auto-submit when time runs out.
+                </p>
+                <button type="button" class="btn btn-danger btn-lg px-4 py-2" data-bs-dismiss="modal">
+                    <i class="fas fa-clock me-2"></i>Continue Quiz
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<script src="quiz.js"></script>
+</body>
+</html>

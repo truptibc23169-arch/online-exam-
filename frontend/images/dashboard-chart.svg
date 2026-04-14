@@ -1,0 +1,29 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="dashboardGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#764ba2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f093fb;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="95" fill="url(#dashboardGradient)" opacity="0.1" stroke="url(#dashboardGradient)" stroke-width="2"/>
+  
+  <!-- Chart bars -->
+  <rect x="50" y="110" width="15" height="40" rx="3" fill="url(#dashboardGradient)" stroke="#667eea" stroke-width="1.5"/>
+  <rect x="75" y="90" width="15" height="60" rx="3" fill="url(#dashboardGradient)" stroke="#667eea" stroke-width="1.5"/>
+  <rect x="100" y="70" width="15" height="80" rx="3" fill="url(#dashboardGradient)" stroke="#667eea" stroke-width="1.5"/>
+  <rect x="125" y="85" width="15" height="65" rx="3" fill="url(#dashboardGradient)" stroke="#667eea" stroke-width="1.5"/>
+  
+  <!-- Axis line -->
+  <line x1="45" y1="155" x2="150" y2="155" stroke="#667eea" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Growth arrow -->
+  <path d="M160,145 L170,125 L165,130" fill="none" stroke="url(#dashboardGradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Top accent -->
+  <circle cx="100" cy="35" r="3" fill="#11998e" opacity="0.8"/>
+  <circle cx="80" cy="45" r="2" fill="#38ef7d" opacity="0.6"/>
+  <circle cx="120" cy="42" r="2" fill="#11998e" opacity="0.7"/>
+</svg>

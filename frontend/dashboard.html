@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Cloud Computing Quiz</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gradient-primary">
+
+<div class="container-fluid min-vh-100 d-flex align-items-center justify-content-center py-5">
+    <div class="card shadow-lg border-0 rounded-4" style="max-width: 1000px; width: 100%;">
+        <div class="card-body p-5">
+            <div class="text-center mb-5 position-relative">
+                <div class="position-absolute top-0 end-0">
+                    <button onclick="logout()" class="btn btn-outline-danger btn-sm rounded-pill">
+                        <i class="fas fa-sign-out-alt me-1"></i>Logout
+                    </button>
+                </div>
+                <div class="floating-clouds">
+                    <img src="images/cloud.svg" alt="Cloud" class="cloud-icon cloud-1">
+                    <img src="images/cloud.svg" alt="Cloud" class="cloud-icon cloud-2">
+                    <img src="images/cloud.svg" alt="Cloud" class="cloud-icon cloud-3">
+                </div>
+                <h1 class="display-5 fw-bold text-white mb-3 animate-fade-in" style="text-shadow: 0 2px 10px rgba(0,0,0,0.2);">
+                    <i class="fas fa-user-circle me-3"></i>Welcome Back!
+                </h1>
+                <h2 id="welcome" class="h3 text-white mb-4 animate-slide-down" style="text-shadow: 0 1px 5px rgba(0,0,0,0.2);"></h2>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="d-grid gap-3">
+                        <div class="card border-0 shadow-lg animate-bounce-in dashboard-card-start">
+                            <div class="card-body text-center p-5">
+                                <div class="quiz-icon mb-3">
+                                    <i class="fas fa-brain fa-4x text-primary animate-pulse"></i>
+                                </div>
+                                <h3 class="card-title text-primary mb-3 fw-bold">
+                                    <i class="fas fa-cloud me-2"></i>Cloud Computing Quiz
+                                </h3>
+                                <p class="card-text text-muted mb-4">Test your knowledge of cloud computing concepts and ace your exam!</p>
+                                <button onclick="start()" class="btn btn-primary btn-lg px-5 py-3 fw-semibold animate-hover" style="border-radius: 25px;">
+                                    <i class="fas fa-play me-2"></i>Start New Quiz
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div id="latest-result" class="card border-0 shadow-lg bg-gradient-card animate-slide-in-right dashboard-card-latest">
+                        <div class="card-body">
+                            <h5 class="card-title text-white mb-4 fw-bold">
+                                <i class="fas fa-chart-line me-2"></i>Latest Performance
+                            </h5>
+                            <div id="latest-analysis"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-5">
+                <h4 class="text-center mb-4 text-white fw-bold" style="text-shadow: 0 2px 10px rgba(0,0,0,0.2);">
+                    <i class="fas fa-history me-2"></i>Quiz History
+                    <small class="text-light" style="font-size: 0.8rem;">(Your Attempts)</small>
+                </h4>
+                <div id="quiz-history" class="row g-3"></div>
+            </div>
+
+            <div class="mt-5">
+                <h4 class="text-center mb-4 text-white fw-bold" style="text-shadow: 0 2px 10px rgba(0,0,0,0.2);">
+                    <i class="fas fa-crown me-2"></i>Leaderboard
+                    <small class="text-light" style="font-size: 0.8rem;">(Top Performers)</small>
+                </h4>
+                <div class="card border-0 shadow-lg" style="background: rgba(255,255,255,0.95);">
+                    <div class="card-body p-4">
+                        <div id="leaderboard"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-5 mb-5">
+                <h4 class="text-center mb-4 text-white fw-bold" style="text-shadow: 0 2px 10px rgba(0,0,0,0.2);">
+                    <i class="fas fa-chart-bar me-2"></i>Your Statistics
+                </h4>
+                <div class="row g-3">
+                    <div class="col-md-3">
+                        <div class="card border-0 shadow-sm" style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8)); color: white;">
+                            <div class="card-body text-center">
+                                <i class="fas fa-list-check fa-2x mb-2"></i>
+                                <h6 class="card-title mb-0">Total Attempts</h6>
+                                <h3 id="total-attempts" class="mt-2">0</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card border-0 shadow-sm" style="background: linear-gradient(135deg, rgba(17, 153, 142, 0.8), rgba(56, 239, 125, 0.8)); color: white;">
+                            <div class="card-body text-center">
+                                <i class="fas fa-star fa-2x mb-2"></i>
+                                <h6 class="card-title mb-0">Average Score</h6>
+                                <h3 id="avg-score" class="mt-2">0%</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card border-0 shadow-sm" style="background: linear-gradient(135deg, rgba(240, 147, 251, 0.8), rgba(245, 100, 100, 0.8)); color: white;">
+                            <div class="card-body text-center">
+                                <i class="fas fa-thumbs-up fa-2x mb-2"></i>
+                                <h6 class="card-title mb-0">Best Score</h6>
+                                <h3 id="best-score" class="mt-2">0/10</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card border-0 shadow-sm" style="background: linear-gradient(135deg, rgba(255, 165, 0, 0.8), rgba(255, 200, 0, 0.8)); color: white;">
+                            <div class="card-body text-center">
+                                <i class="fas fa-bolt fa-2x mb-2"></i>
+                                <h6 class="card-title mb-0">Pass Rate</h6>
+                                <h3 id="pass-rate" class="mt-2">0%</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<script>
+const user = JSON.parse(localStorage.getItem("currentUser")) || null;
+if (!user) {
+    window.location.href = "login.html";
+}
+document.getElementById("welcome").innerText = user ? user.name : "";
+
+function start() {
+    window.location.href = "quiz.html";
+}
+
+function logout() {
+    localStorage.removeItem("currentUser");
+    window.location.href = "login.html";
+}
+
+function formatTime(seconds) {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+}
+
+function getPerformanceBadge(score, total) {
+    const percentage = (score / total) * 100;
+    if (percentage >= 80) return '<span class="badge bg-success">Excellent</span>';
+    if (percentage >= 60) return '<span class="badge bg-warning">Good</span>';
+    return '<span class="badge bg-danger">Needs Improvement</span>';
+}
+
+// Load latest result
+const quizHistory = JSON.parse(localStorage.getItem("quizHistory")) || [];
+if (quizHistory.length > 0) {
+    const latest = quizHistory[quizHistory.length - 1];
+    const percentage = (latest.score / latest.totalQuestions) * 100;
+    const latestHtml = `
+        <div class="text-center">
+            <div class="trophy-container mb-3">
+                ${percentage >= 80 ? '<img src="images/trophy.svg" alt="Gold Trophy" class="trophy-image animate-bounce">' :
+                  percentage >= 60 ? '<i class="fas fa-medal fa-3x text-warning animate-bounce"></i>' :
+                  '<i class="fas fa-award fa-3x text-light animate-bounce"></i>'}
+            </div>
+            <h3 class="text-white mb-2" style="font-size: 2rem; font-weight: bold;">${latest.score}/${latest.totalQuestions}</h3>
+            <div class="progress mb-2" style="height: 8px; background: rgba(255,255,255,0.3);">
+                <div class="progress-bar ${percentage >= 80 ? 'bg-success' : percentage >= 60 ? 'bg-warning' : 'bg-danger'}"
+                     style="width: ${percentage}%"></div>
+            </div>
+            <p class="mb-1 small text-light">Attempted: ${latest.attemptedQuestions || latest.score}/${latest.totalQuestions} questions</p>
+            <p class="mb-1 text-light"><i class="fas fa-clock me-1"></i><strong>Time:</strong> ${formatTime(latest.timeTaken)}</p>
+            <p class="mb-2 text-light"><i class="fas fa-calendar me-1"></i><strong>Date:</strong> ${latest.date}</p>
+            <div class="user-badge-light mb-2">
+                <small class="text-light">
+                    <i class="fas fa-user me-1"></i>${latest.name}<br>
+                    <i class="fas fa-envelope me-1"></i>${latest.email}
+                </small>
+            </div>
+            ${getPerformanceBadge(latest.score, latest.totalQuestions)}
+        </div>
+    `;
+    document.getElementById("latest-analysis").innerHTML = latestHtml;
+} else {
+    document.getElementById("latest-analysis").innerHTML = `
+        <div class="text-center text-muted">
+            <i class="fas fa-clipboard-list fa-2x mb-2"></i>
+            <p>No quiz attempts yet</p>
+        </div>
+    `;
+}
+
+// Load quiz history
+const historyContainer = document.getElementById("quiz-history");
+if (quizHistory.length > 0) {
+    quizHistory.slice(-5).reverse().forEach((result, index) => {
+        const historyCard = `
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 border-0 shadow-sm animate-slide-up" style="animation-delay: ${index * 0.1}s">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h6 class="card-title text-primary mb-0">
+                                <i class="fas fa-user-circle me-1"></i>Attempt ${quizHistory.length - index}
+                            </h6>
+                            ${getPerformanceBadge(result.score, result.totalQuestions)}
+                        </div>
+                        <div class="user-info mb-2 p-2 bg-light rounded">
+                            <small class="text-muted">
+                                <i class="fas fa-user me-1"></i><strong>${result.name}</strong><br>
+                                <i class="fas fa-envelope me-1"></i>${result.email}
+                            </small>
+                        </div>
+                        <div class="mb-2">
+                            <i class="fas fa-trophy text-warning me-1"></i>
+                            <strong>Score:</strong> ${result.score}/${result.totalQuestions}
+                        </div>
+                        <div class="mb-2">
+                            <i class="fas fa-question-circle text-primary me-1"></i>
+                            <strong>Attempted:</strong> ${result.attemptedQuestions || result.score}/${result.totalQuestions}
+                        </div>
+                        <div class="mb-2">
+                            <i class="fas fa-clock text-info me-1"></i>
+                            <strong>Time:</strong> ${formatTime(result.timeTaken)}
+                        </div>
+                        <small class="text-muted">
+                            <i class="fas fa-calendar me-1"></i>${result.date}
+                        </small>
+                    </div>
+                </div>
+            </div>
+        `;
+        historyContainer.innerHTML += historyCard;
+    });
+} else {
+    historyContainer.innerHTML = `
+        <div class="col-12">
+            <div class="text-center text-muted py-4">
+                <i class="fas fa-history fa-3x mb-3"></i>
+                <p class="mb-0">No quiz history available</p>
+                <small>Take your first quiz to see your progress here!</small>
+            </div>
+        </div>
+    `;
+}
+
+// Generate Leaderboard
+function generateLeaderboard() {
+    const allQuizHistory = JSON.parse(localStorage.getItem("quizHistory")) || [];
+    
+    if (allQuizHistory.length === 0) {
+        document.getElementById("leaderboard").innerHTML = `
+            <div class="text-center text-muted py-4">
+                <i class="fas fa-trophy fa-2x mb-2"></i>
+                <p>No leaderboard data available yet</p>
+            </div>
+        `;
+        return;
+    }
+    
+    // Group by email and calculate stats
+    const userStats = {};
+    allQuizHistory.forEach(result => {
+        if (result.email) {
+            if (!userStats[result.email]) {
+                userStats[result.email] = {
+                    name: result.name,
+                    email: result.email,
+                    scores: [],
+                    bestScore: 0,
+                    totalAttempts: 0
+                };
+            }
+            userStats[result.email].scores.push(result.score);
+            userStats[result.email].totalAttempts++;
+            userStats[result.email].bestScore = Math.max(userStats[result.email].bestScore, result.score);
+        }
+    });
+    
+    // Convert to array and sort
+    const leaderboard = Object.values(userStats)
+        .map(user => ({
+            name: user.name,
+            email: user.email,
+            bestScore: user.bestScore,
+            avgScore: Math.round((user.scores.reduce((a, b) => a + b, 0) / user.scores.length) * 10) / 10,
+            attempts: user.totalAttempts
+        }))
+        .sort((a, b) => {
+            if (a.bestScore !== b.bestScore) return b.bestScore - a.bestScore;
+            return b.avgScore - a.avgScore;
+        })
+        .slice(0, 10);
+    
+    // Build table HTML
+    let leaderboardHtml = '<div class="table-responsive"><table class="table table-hover mb-0">';
+    leaderboardHtml += '<thead><tr><th style="color: #667eea; font-weight: 600;">#</th><th style="color: #667eea; font-weight: 600;">Name</th><th style="color: #667eea; font-weight: 600;">Best Score</th><th style="color: #667eea; font-weight: 600;">Avg Score</th><th style="color: #667eea; font-weight: 600;">Attempts</th></tr></thead>';
+    leaderboardHtml += '<tbody>';
+    
+    leaderboard.forEach((entry, index) => {
+        const medal = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : (index + 1);
+        const rowStyle = index < 3 ? 'background-color: rgba(102, 126, 234, 0.05);' : '';
+        leaderboardHtml += `
+            <tr style="${rowStyle}">
+                <td><strong>${medal}</strong></td>
+                <td><i class="fas fa-user me-2" style="color: #667eea;"></i>${entry.name}</td>
+                <td><span class="badge bg-success">${entry.bestScore}/10</span></td>
+                <td><strong style="color: #667eea;">${entry.avgScore}</strong></td>
+                <td><small class="text-muted">${entry.attempts}</small></td>
+            </tr>
+        `;
+    });
+    
+    leaderboardHtml += '</tbody></table></div>';
+    document.getElementById("leaderboard").innerHTML = leaderboardHtml;
+}
+
+// Calculate Statistics
+function calculateStatistics() {
+    if (quizHistory.length === 0) {
+        document.getElementById("total-attempts").innerText = "0";
+        document.getElementById("avg-score").innerText = "0%";
+        document.getElementById("best-score").innerText = "0/10";
+        document.getElementById("pass-rate").innerText = "0%";
+        return;
+    }
+    
+    const totalAttempts = quizHistory.length;
+    const allScores = quizHistory.map(q => q.score);
+    const totalScore = allScores.reduce((a, b) => a + b, 0);
+    const avgPercentage = Math.round((totalScore / (totalAttempts * 10)) * 100);
+    const bestScore = Math.max(...allScores);
+    const passCount = quizHistory.filter(q => q.score >= 6).length;
+    const passRate = Math.round((passCount / totalAttempts) * 100);
+    
+    document.getElementById("total-attempts").innerText = totalAttempts;
+    document.getElementById("avg-score").innerText = avgPercentage + "%";
+    document.getElementById("best-score").innerText = bestScore + "/10";
+    document.getElementById("pass-rate").innerText = passRate + "%";
+}
+
+// Initialize display
+calculateStatistics();
+generateLeaderboard();
+</script>
+</body>
+</html>

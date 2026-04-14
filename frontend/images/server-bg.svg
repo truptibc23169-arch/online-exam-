@@ -1,0 +1,49 @@
+<svg width="200" height="150" viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:0.1" />
+      <stop offset="50%" style="stop-color:#764ba2;stop-opacity:0.1" />
+      <stop offset="100%" style="stop-color:#f093fb;stop-opacity:0.1" />
+    </linearGradient>
+
+    <linearGradient id="serverGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4facfe;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00f2fe;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="200" height="150" fill="url(#bgGradient)"/>
+
+  <!-- Server rack -->
+  <rect x="70" y="40" width="60" height="80" rx="5" fill="url(#serverGradient)" stroke="#00bcd4" stroke-width="2"/>
+
+  <!-- Server units -->
+  <rect x="75" y="45" width="50" height="12" fill="#ffffff" opacity="0.9"/>
+  <rect x="75" y="60" width="50" height="12" fill="#ffffff" opacity="0.9"/>
+  <rect x="75" y="75" width="50" height="12" fill="#ffffff" opacity="0.9"/>
+  <rect x="75" y="90" width="50" height="12" fill="#ffffff" opacity="0.9"/>
+
+  <!-- Status lights -->
+  <circle cx="80" cy="51" r="2" fill="#4caf50"/>
+  <circle cx="80" cy="66" r="2" fill="#4caf50"/>
+  <circle cx="80" cy="81" r="2" fill="#ff9800"/>
+  <circle cx="80" cy="96" r="2" fill="#4caf50"/>
+
+  <!-- Network cables -->
+  <path d="M65,60 Q55,50 45,60 Q35,70 45,80" fill="none" stroke="#795548" stroke-width="3"/>
+  <path d="M135,70 Q145,60 155,70 Q165,80 155,90" fill="none" stroke="#795548" stroke-width="3"/>
+
+  <!-- Cloud icons -->
+  <g opacity="0.6">
+    <circle cx="30" cy="30" r="8" fill="#ffffff"/>
+    <circle cx="35" cy="25" r="10" fill="#ffffff"/>
+    <circle cx="45" cy="30" r="8" fill="#ffffff"/>
+  </g>
+
+  <g opacity="0.4">
+    <circle cx="160" cy="40" r="6" fill="#ffffff"/>
+    <circle cx="165" cy="35" r="8" fill="#ffffff"/>
+    <circle cx="175" cy="40" r="6" fill="#ffffff"/>
+  </g>
+</svg>

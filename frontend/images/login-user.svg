@@ -1,0 +1,26 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="userGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="95" fill="url(#userGradient)" opacity="0.1" stroke="url(#userGradient)" stroke-width="2"/>
+  
+  <!-- Head -->
+  <circle cx="100" cy="60" r="25" fill="url(#userGradient)" stroke="#667eea" stroke-width="2"/>
+  
+  <!-- Body -->
+  <path d="M75,90 L75,130 Q75,140 85,140 L115,140 Q125,140 125,130 L125,90 Z" 
+        fill="url(#userGradient)" stroke="#667eea" stroke-width="2"/>
+  
+  <!-- Arms -->
+  <line x1="75" y1="100" x2="45" y2="110" stroke="url(#userGradient)" stroke-width="3" stroke-linecap="round"/>
+  <line x1="125" y1="100" x2="155" y2="110" stroke="url(#userGradient)" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Spotlight effect -->
+  <circle cx="75" cy="50" r="4" fill="#ffffff" opacity="0.8"/>
+  <circle cx="110" cy="45" r="2" fill="#ffffff" opacity="0.6"/>
+</svg>
